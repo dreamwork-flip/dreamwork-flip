@@ -7,16 +7,22 @@ if (empty($_POST["name"])) {
     $name = $_POST["name"];
 }
 
+if (empty($_POST["phone"])) {
+    $errorMSG = "Phone is required ";
+} else {
+    $phone = $_POST["phone"];
+}
+
 if (empty($_POST["email"])) {
     $errorMSG = "Email is required ";
 } else {
     $email = $_POST["email"];
 }
 
-if (empty($_POST["message"])) {
-    $errorMSG = "Message is required ";
+if (empty($_POST["select"])) {
+    $errorMSG = "Select is required ";
 } else {
-    $message = $_POST["message"];
+    $select = $_POST["select"];
 }
 
 if (empty($_POST["terms"])) {
@@ -26,18 +32,21 @@ if (empty($_POST["terms"])) {
 }
 
 $EmailTo = "yourname@domain.com";
-$Subject = "New message from Aria landing page";
+$Subject = "New quote request from Aria landing page";
 
 // prepare email body text
 $Body = "";
 $Body .= "Name: ";
 $Body .= $name;
 $Body .= "\n";
+$Body .= "Phone: ";
+$Body .= $phone;
+$Body .= "\n";
 $Body .= "Email: ";
 $Body .= $email;
 $Body .= "\n";
-$Body .= "Message: ";
-$Body .= $message;
+$Body .= "Package: ";
+$Body .= $select;
 $Body .= "\n";
 $Body .= "Terms: ";
 $Body .= $terms;
@@ -45,7 +54,6 @@ $Body .= "\n";
 
 // send email
 $success = mail($EmailTo, $Subject, $Body, "From:".$email);
-
 // redirect to success page
 if ($success && $errorMSG == ""){
    echo "success";
